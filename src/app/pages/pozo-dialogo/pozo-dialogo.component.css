@@ -1,0 +1,92 @@
+/*Card principal*/
+mat-card {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    /* centra horizontalmente */
+    align-items: center;
+    /* opcional para textos internos */
+    text-align: center;
+}
+
+mat-card-header {
+    margin-bottom: 16px;
+}
+
+mat-form-field {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Separación vertical del stepper y contenido de cada step */
+.mat-step-content {
+    padding: 20px 0;
+}
+
+/* Separación de botones del contenido */
+.button-group {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Margen entre los steps del stepper */
+mat-vertical-stepper .mat-step {
+    margin-bottom: 16px;
+}
+
+.margen-top {
+    padding-top: 10px;
+}
+
+.grid-row {
+    display: grid;
+    /* opcional para textos internos */
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+/* Forzar 3 columnas en pantallas grandes */
+@media (min-width: 992px) {
+    .grid-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* En pantallas medianas (tablet), usar 2 columnas */
+@media (min-width: 600px) and (max-width: 991px) {
+    .grid-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* En pantallas pequeñas (móvil), 1 columna */
+@media (max-width: 599px) {
+    .grid-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.row {
+    display: flex;
+    /* Espacio entre los elementos */
+    gap: 16px;
+    /* Permite que los elementos bajen si no caben */
+    flex-wrap: wrap;
+}
+
+.flex-item {
+    /* Todos ocupan el mismo ancho */
+    flex: 1;
+    /* Evita que se hagan demasiado pequeños */
+    min-width: 220px;
+}
+
+/* Opcional: en pantallas pequeñas, fuerza a que todos se acomoden vertical */
+@media (max-width: 600px) {
+    .row {
+        flex-direction: column;
+    }
+}

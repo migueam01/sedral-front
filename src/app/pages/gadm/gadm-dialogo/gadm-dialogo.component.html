@@ -1,0 +1,42 @@
+<mat-card>
+    <mat-card-header class="header-centrado">
+        <mat-card-title>Formulario de Ingreso</mat-card-title>
+    </mat-card-header>
+    <mat-divider class="estilo-divider"></mat-divider>
+    <mat-card-content>
+
+        <div class="contenedor-elementos">
+            <form [formGroup]="form" #frmGadm="ngForm" (ngSubmit)="operar()">
+
+                <div [hidden]="true">
+                    <mat-form-field class="form-field">
+                        <mat-label>Código GADM</mat-label>
+                        <input matInput placeholder="ID" required formControlName="idGadm">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="margen-top form-field">
+                    <mat-label>Nombre GADM</mat-label>
+                    <input matInput placeholder="Ingrese Nombre" required formControlName="nombre">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Alias GADM</mat-label>
+                    <input matInput placeholder="Ingrese alias" required formControlName="alias">
+                </mat-form-field>
+
+                <mat-card-actions class="button-group">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="frmGadm.invalid">
+                        <mat-icon>done</mat-icon>
+                        <span>Aceptar</span>
+                    </button>
+
+                    <button mat-raised-button color="accent" type="button" routerLink='/gadm'>
+                        <mat-icon>close</mat-icon>
+                        <span>Cancelar</span>
+                    </button>
+                </mat-card-actions>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

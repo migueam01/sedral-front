@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-header class="header-centrado">
+        <mat-card-title>Formulario de Ingreso</mat-card-title>
+    </mat-card-header>
+    <mat-divider class="estilo-divider"></mat-divider>
+    <mat-card-content>
+        <div class="contenedor-elementos">
+            <form [formGroup]="form" #frmResponsable="ngForm" (ngSubmit)="operar()">
+                <div [hidden]="true">
+                    <mat-form-field class="form-field">
+                        <mat-label>Código Responsable</mat-label>
+                        <input matInput placeholder="ID" required formControlName="idResponsable">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="margen-top form-field">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Ingrese nombre" required formControlName="nombre">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Ingrese apellido" required formControlName="apellido">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput placeholder="Ingrese teléfono" required formControlName="telefono">
+                </mat-form-field>
+
+                <mat-card-actions class="button-group">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="frmResponsable.invalid">
+                        <mat-icon>done</mat-icon>
+                        <span>Aceptar</span>
+                    </button>
+
+                    <button mat-raised-button color="accent" type="button" routerLink='/responsable'>
+                        <mat-icon>close</mat-icon>
+                        <span>Cancelar</span>
+                    </button>
+                </mat-card-actions>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

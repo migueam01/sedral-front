@@ -1,0 +1,48 @@
+<mat-card>
+    <mat-card-header class="header-centrado">
+        <mat-card-title>Formulario de Ingreso</mat-card-title>
+    </mat-card-header>
+    <mat-divider class="estilo-divider"></mat-divider>
+    <mat-card-content>
+
+        <div class="contenedor-elementos">
+            <form [formGroup]="form" #frmSector="ngForm" (ngSubmit)="aceptar()">
+
+                <div [hidden]="true">
+                    <mat-form-field class="form-field">
+                        <mat-label>Código Sector</mat-label>
+                        <input matInput placeholder="ID" required formControlName="idSector">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="margen-top form-field">
+                    <mat-label>Nombre Sector</mat-label>
+                    <input matInput placeholder="Ingrese sector" required formControlName="nombre">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Proyectos</mat-label>
+                    <mat-select formControlName="proyectoSelect" required>
+                        @for ( pry of proyectos ; track pry.idProyecto) {
+                        <mat-option [value]="pry.idProyecto">
+                            {{pry.nombre}}
+                        </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-card-actions class="button-group">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="frmSector.invalid">
+                        <mat-icon>done</mat-icon>
+                        <span>Aceptar</span>
+                    </button>
+
+                    <button mat-raised-button color="accent" type="button" routerLink='/sector'>
+                        <mat-icon>close</mat-icon>
+                        <span>Cancelar</span>
+                    </button>
+                </mat-card-actions>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

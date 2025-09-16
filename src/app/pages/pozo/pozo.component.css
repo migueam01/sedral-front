@@ -1,0 +1,37 @@
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+/* styles.css o component.css */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+/* Opcional: Para que la tabla ocupe todo el ancho disponible */
+table {
+    width: 100%;
+    /* Ancho mínimo para muchas columnas */
+    min-width: 600px;
+}
+
+/* Mejorar la apariencia del scroll */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

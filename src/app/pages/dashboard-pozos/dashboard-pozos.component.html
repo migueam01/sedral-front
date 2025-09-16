@@ -1,0 +1,47 @@
+<div class="resumen-container">
+  <div class="tarjeta">
+    <h3>Total de pozos</h3>
+    <p>{{ totalPozos | async }}</p>
+  </div>
+  <div class="tarjeta">
+    <h3>Altura promedio</h3>
+    @if (statsAltura | async; as statsAltura) {
+    <p>{{ statsAltura[0].alturaPromedio.toFixed(2) }} m</p>
+    }
+  </div>
+  <div class="tarjeta">
+    <h3>Altura máxima</h3>
+    @if (statsAltura | async; as statsAltura) {
+    <p>{{ statsAltura[0].alturaMaxima.toFixed(2) }} m</p>
+    }
+  </div>
+  <div class="tarjeta">
+    <h3>Altura mínima</h3>
+    @if (statsAltura | async; as statsAltura) {
+    <p>{{ statsAltura[0].alturaMinima.toFixed(2) }} m</p>
+    }
+  </div>
+</div>
+
+<div class="dashboard-container">
+  <div class="card">
+    <h3>Cantidad de Pozos por Estado</h3>
+    <div class="chart-container">
+      <canvas #estadosChart></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cantidad de Pozos Tapados vs No Tapados</h3>
+    <div class="chart-container">
+      <canvas #tapadosChart></canvas>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Cantidad de Pozos por tipo de calzada</h3>
+    <div class="chart-container">
+      <canvas #calzadasChart></canvas>
+    </div>
+  </div>
+</div>

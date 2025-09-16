@@ -1,0 +1,44 @@
+<div class="resumen-container">
+    <div class="tarjeta">
+        <h3>Cantidad de tuberías</h3>
+        <p>{{ totalTuberias | async }}</p>
+    </div>
+    <div class="tarjeta">
+        <h3>Longitud de tuberías</h3>
+        <p>{{ sumaLongitudes | async }} m</p>
+    </div>
+</div>
+
+<div class="dashboard-container">
+    <!-- Gráfico de Diámetros -->
+    <div class="card">
+        <h3>Longitud por Diámetro</h3>
+        <div class="chart-container">
+            <canvas #diametrosChart></canvas>
+        </div>
+    </div>
+
+    <!-- Gráfico de Materiales -->
+    <div class="card">
+        <h3>Longitud por Material</h3>
+        <div class="chart-container">
+            <canvas #materialesChart></canvas>
+        </div>
+    </div>
+
+    <!-- Gráfico de Funcionamiento -->
+    <div class="card">
+        <h3>Longitud por Funcionamiento</h3>
+        <div class="chart-container">
+            <canvas #funcionamientoChart></canvas>
+        </div>
+    </div>
+
+    <!-- Gráfico Rangos de longitud -->
+    <div class="card">
+        <h3>Rangos de Longitud</h3>
+        <div class="chart-container">
+            <canvas #rangosChart></canvas>
+        </div>
+    </div>
+</div>

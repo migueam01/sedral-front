@@ -1,0 +1,71 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Menú lateral -->
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="sidenav">
+    <mat-toolbar color="primary" class="sidenav-header">
+      <mat-icon>map</mat-icon>
+      <span class="title">SEDRAL</span>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <a mat-list-item routerLink="/mapa" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon color="warn">map</mat-icon>
+        <span>Mapa</span>
+      </a>
+
+      <a mat-list-item routerLink="/gadm" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>business</mat-icon>
+        <span>GADM</span>
+      </a>
+
+      <a mat-list-item routerLink="/proyecto" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon color="primary">work</mat-icon>
+        <span>Proyecto</span>
+      </a>
+
+      <a mat-list-item routerLink="/sector" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>place</mat-icon>
+        <span>Sector</span>
+      </a>
+
+      <a mat-list-item routerLink="/descarga" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>waves</mat-icon>
+        <span>Descarga</span>
+      </a>
+
+      <a mat-list-item routerLink="/responsable" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>person</mat-icon>
+        <span>Responsable</span>
+      </a>
+
+      <a mat-list-item routerLink="/pozo" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>adjust</mat-icon>
+        <span>Pozos</span>
+      </a>
+
+      <a mat-list-item routerLink="/tuberia" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>timeline</mat-icon>
+        <span>Tuberías</span>
+      </a>
+
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>bar_chart</mat-icon>
+        <span>Dashboard</span>
+      </a>
+
+      <a mat-list-item routerLink="/configuracion" routerLinkActive="active-link" class="menu-item">
+        <mat-icon matListIcon>exit_to_app</mat-icon>
+        <span>Salir</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Contenido principal -->
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <span class="titulo">RED DE ALCANTARILLADO SANITARIO - {{seccionActual}}</span>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

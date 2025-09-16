@@ -1,0 +1,142 @@
+<mat-card>
+    <mat-card-header class="header-centrado">
+        <mat-card-title>Formulario de Ingreso</mat-card-title>
+    </mat-card-header>
+    <mat-divider class="estilo-divider"></mat-divider>
+    <mat-card-content>
+
+        <div class="contenedor-elementos">
+            <form [formGroup]="form" #frmTuberia="ngForm" (ngSubmit)="aceptar()">
+
+                <div [hidden]="true">
+                    <mat-form-field class="form-field">
+                        <mat-label>Código Tubería</mat-label>
+                        <input matInput placeholder="ID" required formControlName="idTuberia">
+                    </mat-form-field>
+                </div>
+
+                <div class="row margen-top">
+                    <mat-form-field appearance="outline" class="flex-item">
+                        <mat-label>Pozo inicio</mat-label>
+                        <input type="text" placeholder="Pozo inicio" aria-label="Number" matInput required
+                            [formControl]="myControlInicio" [matAutocomplete]="autoInicio" formControlName="pozoInicio">
+                        <mat-autocomplete #autoInicio="matAutocomplete" [displayWith]="displayFn">
+                            @for ( p of filteredOptionsInicio | async; track p.idPozo) {
+                            <mat-option [value]="p">
+                                {{p.nombre}}
+                            </mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="flex-item">
+                        <mat-label>Pozo fin</mat-label>
+                        <input type="text" placeholder="Pozo fin" aria-label="Number" matInput required
+                            [formControl]="myControlFin" [matAutocomplete]="autoFin" formControlName="pozoFin">
+                        <mat-autocomplete #autoFin="matAutocomplete" [displayWith]="displayFn">
+                            @for ( p of filteredOptionsFin | async; track p.idPozo) {
+                            <mat-option [value]="p">
+                                {{p.nombre}}
+                            </mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Orientación</mat-label>
+                    <mat-select formControlName="orientacion" required>
+                        @for ( o of orientaciones ; track o) {
+                        <mat-option [value]="o">
+                            {{o}}
+                        </mat-option>
+                        }
+                    </mat-select>
+                    @if(form.get('orientacion')?.hasError('required')){
+                    <mat-error>Campo obligatorio</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Flujo</mat-label>
+                    <mat-select formControlName="flujo" required>
+                        @for ( f of flujos ; track f) {
+                        <mat-option [value]="f">
+                            {{f}}
+                        </mat-option>
+                        }
+                    </mat-select>
+                    @if(form.get('flujo')?.hasError('required')){
+                    <mat-error>Campo obligatorio</mat-error>
+                    }
+                </mat-form-field>
+
+                <div class="row margen-top">
+                    <mat-form-field appearance="outline" class="flex-item">
+                        <mat-label>Altura de la base</mat-label>
+                        <input matInput placeholder="Ingrese altura" required formControlName="hBase">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="flex-item">
+                        <mat-label>Altura a la corona</mat-label>
+                        <input matInput placeholder="Ingrese altura" required formControlName="hCorona">
+                    </mat-form-field>
+                </div>
+
+                <div class="div-diametro">
+                    <button mat-raised-button color="accent" type="button" (click)="calcularDiametro()"
+                        class="boton-diametro">
+                        <mat-icon>close</mat-icon>
+                        <span>Calcular diámetro</span>
+                    </button>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Diámetro</mat-label>
+                        <input matInput type="number" readonly placeholder="Diámetro" required
+                            formControlName="diametro">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Material</mat-label>
+                    <mat-select formControlName="material" required>
+                        @for ( m of materiales ; track m) {
+                        <mat-option [value]="m">
+                            {{m}}
+                        </mat-option>
+                        }
+                    </mat-select>
+                    @if(form.get('material')?.hasError('required')){
+                    <mat-error>Campo obligatorio</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Funciona</mat-label>
+                    <mat-select formControlName="funciona" required>
+                        @for ( f of funciona ; track f) {
+                        <mat-option [value]="f">
+                            {{f}}
+                        </mat-option>
+                        }
+                    </mat-select>
+                    @if(form.get('funciona')?.hasError('required')){
+                    <mat-error>Campo obligatorio</mat-error>
+                    }
+                </mat-form-field>
+
+                <mat-card-actions class="button-group">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="frmTuberia.invalid">
+                        <mat-icon>done</mat-icon>
+                        <span>Aceptar</span>
+                    </button>
+
+                    <button mat-raised-button color="accent" type="button" routerLink='/tuberia'>
+                        <mat-icon>close</mat-icon>
+                        <span>Cancelar</span>
+                    </button>
+                </mat-card-actions>
+            </form>
+        </div>
+    </mat-card-content>
+</mat-card>

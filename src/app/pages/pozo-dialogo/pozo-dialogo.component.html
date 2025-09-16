@@ -1,0 +1,284 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Formulario de Ingreso</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-horizontal-stepper linear #stepper>
+            <!--Primera pantalla-->
+            <mat-step [stepControl]="primeraPantallaForm" errorMessage="Complete los campos">
+
+                <form [formGroup]="primeraPantallaForm" #frmPantalla1="ngForm">
+
+                    <ng-template matStepLabel>Datos generales</ng-template>
+
+                    <div [hidden]="true">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Código pozo</mat-label>
+                            <input matInput placeholder="ID" required formControlName="idPozo">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row margen-top">
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Nombre pozo</mat-label>
+                            <input matInput placeholder="Ingrese pozo" required formControlName="nombre">
+                            @if(primeraPantallaForm.get('nombre')?.hasError('required')){
+                            <mat-error>Campo obligatorio</mat-error>
+                            }
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Pozo tapado</mat-label>
+                            <mat-select formControlName="tapado" required>
+                                @for ( t of opcionTapado ; track t) {
+                                <mat-option [value]="t">
+                                    {{t}}
+                                </mat-option>
+                                }
+                            </mat-select>
+                            @if(primeraPantallaForm.get('tapado')?.hasError('required')){
+                            <mat-error>Campo obligatorio</mat-error>
+                            }
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tipo de sistema</mat-label>
+                        <mat-select formControlName="sistema" required>
+                            @for ( s of sistemas ; track s) {
+                            <mat-option [value]="s">
+                                {{s}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                        @if(primeraPantallaForm.get('sistema')?.hasError('required')){
+                        <mat-error>Campo obligatorio</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Sectores</mat-label>
+                        <mat-select formControlName="sectorSelect" required>
+                            @for ( sector of sectores ; track sector.idSector) {
+                            <mat-option [value]="sector.idSector">
+                                {{sector.nombre}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                        @if(primeraPantallaForm.get('sectorSelect')?.hasError('required')){
+                        <mat-error>Campo obligatorio</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Responsables</mat-label>
+                        <mat-select formControlName="responsableSelect" required>
+                            @for ( resp of responsables ; track resp.idResponsable) {
+                            <mat-option [value]="resp.idResponsable">
+                                {{resp.nombre}} {{resp.apellido}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                        @if(primeraPantallaForm.get('responsableSelect')?.hasError('required')){
+                        <mat-error>Campo obligatorio</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descargas</mat-label>
+                        <mat-select formControlName="descargaSelect" required>
+                            @for ( dsc of descargas ; track dsc.idDescarga) {
+                            <mat-option [value]="dsc.idDescarga">
+                                {{dsc.nombre}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                        @if(primeraPantallaForm.get('descargaSelect')?.hasError('required')){
+                        <mat-error>Campo obligatorio</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Fecha de catastro</mat-label>
+                            <input matInput [matDatepicker]="pickerCatastro" placeholder="Escoge una fecha"
+                                [max]="maxFecha" formControlName="fechaCatastro">
+                            <mat-datepicker-toggle matSuffix [for]="pickerCatastro"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerCatastro></mat-datepicker>
+                            @if(primeraPantallaForm.get('fechaCatastro')?.hasError('required')){
+                            <mat-error>Campo obligatorio</mat-error>
+                            }
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Fecha actualización</mat-label>
+                            <input matInput [matDatepicker]="pickerActualizacion" placeholder="Escoge una fecha"
+                                [max]="maxFecha" formControlName="fechaActualizacion">
+                            <mat-datepicker-toggle matSuffix [for]="pickerActualizacion"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerActualizacion></mat-datepicker>
+                            @if(primeraPantallaForm.get('fechaActualizacion')?.hasError('required')){
+                            <mat-error>Campo obligatorio</mat-error>
+                            }
+                        </mat-form-field>
+                    </div>
+
+                    <div class="button-group">
+                        <button mat-raised-button color="primary" matStepperNext [disabled]="frmPantalla1.invalid">
+                            Siguiente
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!--Segunda pantalla-->
+            <mat-step [stepControl]="segundaPantallaForm" errorMessage="Complete los campos">
+                <form [formGroup]="segundaPantallaForm" #frmPantalla2="ngForm">
+
+                    <ng-template matStepLabel>Ubicación</ng-template>
+
+                    <mat-form-field appearance="outline" class="margen-top">
+                        <mat-label>Calle oeste - este</mat-label>
+                        <input matInput placeholder="Ingrese calle oeste - este" required formControlName="calleOE">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Calle norte - sur</mat-label>
+                        <input matInput placeholder="Ingrese calle norte - sur" required formControlName="calleNS">
+                    </mat-form-field>
+
+                    <div class="grid-row">
+                        <mat-form-field appearance="outline" class="grid-item">
+                            <mat-label>Coordenada norte movil</mat-label>
+                            <input matInput placeholder="Ingrese coordenada norte movil" required
+                                formControlName="norteMovil">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="grid-item">
+                            <mat-label>Coordenada este movil</mat-label>
+                            <input matInput placeholder="Ingrese coordenada este movil" required
+                                formControlName="esteMovil">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="grid-item">
+                            <mat-label>Cota movil</mat-label>
+                            <input matInput placeholder="Ingrese cota movil" required formControlName="cotaMovil">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="grid-row">
+                        <mat-form-field appearance="outline" class="grid-item">
+                            <mat-label>Coordenada norte topografía</mat-label>
+                            <input matInput placeholder="Ingrese coordenada norte topografía" required
+                                formControlName="norteTopo">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="grid-item">
+                            <mat-label>Coordenada este topografía</mat-label>
+                            <input matInput placeholder="Ingrese coordenada este topografía" required
+                                formControlName="esteTopo">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="grid-item">
+                            <mat-label>Cota topografía</mat-label>
+                            <input matInput placeholder="Ingrese cota topografía" required formControlName="cotaTopo">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>Zona</mat-label>
+                            <input matInput placeholder="Ingrese zona" required formControlName="zona">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="flex-item">
+                            <mat-label>SRID</mat-label>
+                            <input matInput placeholder="Ingrese SRID" required formControlName="srid">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tipo de Calzada</mat-label>
+                        <mat-select formControlName="calzada" required>
+                            @for ( c of calzadas ; track c) {
+                            <mat-option [value]="c">
+                                {{c}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="button-group">
+                        <button mat-raised-button matStepperPrevious>Anterior</button>
+                        <button mat-raised-button color="primary" matStepperNext [disabled]="frmPantalla2.invalid">
+                            Siguiente
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+
+            <!--Tercera pantalla-->
+            <mat-step [stepControl]="terceraPantallaForm" errorMessage="Complete los campos">
+                <form [formGroup]="terceraPantallaForm" #frmPantalla3="ngForm" (ngSubmit)="aceptar()">
+
+                    <ng-template matStepLabel>Dimensiones y estado</ng-template>
+
+                    <mat-form-field appearance="outline" class="margen-top">
+                        <mat-label>Dimensión de la tapa</mat-label>
+                        <input matInput placeholder="Ingrese dimensión" required formControlName="dimensionTapa">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Altura del pozo</mat-label>
+                        <input matInput placeholder="Ingrese la altura del pozo" required formControlName="altura">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ancho del pozo</mat-label>
+                        <input matInput placeholder="Ingrese ancho del pozo" required formControlName="ancho">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tipo de fluido</mat-label>
+                        <mat-select formControlName="fluido" required>
+                            @for ( f of sistemas ; track f) {
+                            <mat-option [value]="f">
+                                {{f}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Estado del pozo</mat-label>
+                        <mat-select formControlName="estado" required>
+                            @for ( e of estados ; track e) {
+                            <mat-option [value]="e">
+                                {{e}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Observaciones</mat-label>
+                        <textarea matInput rows="4" placeholder="Ingrese observación" required
+                            formControlName="observacion"></textarea>
+                    </mat-form-field>
+
+                    <div class="button-group">
+                        <button mat-raised-button matStepperPrevious>Anterior</button>
+                        <button mat-raised-button color="accent" type="submit" [disabled]="frmPantalla3.invalid">
+                            Finalizar
+                        </button>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-horizontal-stepper>
+        <div>
+            <button mat-raised-button color="accent" type="button" routerLink='/pozo'>
+                <mat-icon>close</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
