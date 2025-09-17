@@ -193,7 +193,7 @@ export class DashboardTuberiasComponent implements AfterViewInit, OnDestroy, OnI
 
     const labels = this.funcionamientos.map(d => d.valor);
     const valores = this.funcionamientos.map(d => d.longitudTotal ?? 0); //si requiere mostrar longitudes en las porciones
-    const porcentajes = this.materiales.map(d => d.porcentajeLongitud ?? 0);
+    const porcentajes = this.funcionamientos.map(d => d.porcentajeLongitud ?? 0);
     const colores = this.generaColores(this.funcionamientos.length);
 
     const data: ChartData<'doughnut'> = {
