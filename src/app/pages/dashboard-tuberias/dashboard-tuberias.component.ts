@@ -72,7 +72,7 @@ export class DashboardTuberiasComponent implements AfterViewInit, OnDestroy, OnI
   }
 
   cargarDatosFuncionamiento() {
-    this.service.listarPorMaterial().subscribe({
+    this.service.listarPorFuncionamiento().subscribe({
       next: data => {
         this.funcionamientos = data;
         this.renderizarGraficoFuncionamiento();
