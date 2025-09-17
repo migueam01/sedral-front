@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Chart, ChartData, ChartOptions, registerables, TooltipItem } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { CantidadPozo } from '../../_model/cantidad-pozo';
+import { RangoAltura } from '../../_model/rango-altura';
 
 Chart.register(...registerables);
 
@@ -22,6 +23,8 @@ export class DashboardPozosComponent implements OnInit, AfterViewInit, OnDestroy
   tapadosChart!: ElementRef<HTMLCanvasElement>;
   @ViewChild('calzadasChart', { static: true })
   calzadasChart!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('rangosChart', { static: true })
+  rangosChart!: ElementRef<HTMLCanvasElement>;
 
   private charts: Chart[] = [];
 
@@ -30,6 +33,7 @@ export class DashboardPozosComponent implements OnInit, AfterViewInit, OnDestroy
   estados: CantidadPozo[] = [];
   tapados: CantidadPozo[] = [];
   calzadas: CantidadPozo[] = [];
+  rangosAltura: RangoAltura[] = [];
 
   constructor(private service: PozoService) { }
 
@@ -41,6 +45,7 @@ export class DashboardPozosComponent implements OnInit, AfterViewInit, OnDestroy
     this.cargarDatosEstados();
     this.cargarDatosTapados();
     this.cargarDatosCalzadas();
+    this.cargarDatosRangos();
   }
 
   ngOnInit(): void {
@@ -72,6 +77,15 @@ export class DashboardPozosComponent implements OnInit, AfterViewInit, OnDestroy
       next: data => {
         this.calzadas = data;
         this.renderizarGraficoCalzadas();
+      }
+    });
+  }
+
+  cargarDatosRangos() {
+    this.service.listarPorRangoAltura().subscribe({
+      next: data => {
+        this.rangosAltura = data;
+        this.renderizarGraficoRangos();
       }
     });
   }
@@ -225,6 +239,57 @@ export class DashboardPozosComponent implements OnInit, AfterViewInit, OnDestroy
       }
     };
 
+    this.charts.push(new Chart(ctx, { type: 'bar', data, options }));
+  }
+
+  private renderizarGraficoRangos(): void {
+    const ctx = this.rangosChart.nativeElement.getContext('2d');
+    if (!ctx) return;
+
+    const labels = this.rangosAltura.map(d => d.rangoAltura);
+    const valores = this.rangosAltura.map(d => d.cantidad ?? 0);
+    const colores = this.generaColores(this.rangosAltura.length);
+
+    const data: ChartData<'bar'> = {
+      labels,
+      datasets: [{ label: 'Cantidad', data: valores, backgroundColor: colores }]
+    };
+
+    const options: ChartOptions<'bar'> = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (item: TooltipItem<'bar'>) => {
+              const idx = item.dataIndex;
+              const cantidad = this.rangosAltura[idx].cantidad ?? 0;
+              return `${cantidad}`;
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Cantidad',
+            padding: { top: 10, bottom: 20 }
+          },
+          ticks: {
+            callback: (value) => `${Number(value)}`
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Rango cantidad',
+            padding: { top: 20 }
+          }
+        }
+      }
+    };
     this.charts.push(new Chart(ctx, { type: 'bar', data, options }));
   }
 

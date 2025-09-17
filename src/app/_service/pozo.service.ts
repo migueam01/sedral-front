@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { PozoMapa } from '../_model/pozo-mapa';
 import { CantidadPozo } from '../_model/cantidad-pozo';
 import { StatsAlturaPozo } from '../_model/stats-altura-pozos';
+import { RangoAltura } from '../_model/rango-altura';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +62,9 @@ export class PozoService {
 
   public listarPorCalzada(): Observable<CantidadPozo[]> {
     return this.http.get<CantidadPozo[]>(`${this.url}/calzadas`);
+  }
+
+  public listarPorRangoAltura(): Observable<RangoAltura[]> {
+    return this.http.get<RangoAltura[]>(`${this.url}/rangos-altura`);
   }
 }
