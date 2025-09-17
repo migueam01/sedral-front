@@ -219,7 +219,7 @@ export class DashboardTuberiasComponent implements AfterViewInit, OnDestroy, OnI
           display: true,
           color: '#000000ff',
           font: { weight: 'bold' },
-          formatter: (value: number) => `${value.toFixed(2)} m`
+          formatter: (value: number) => `${value.toFixed(2)} %`
         }
       }
     };
