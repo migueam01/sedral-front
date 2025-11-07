@@ -56,7 +56,10 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 22,
       attribution: '© OpenStreetMap contributors'
+      //attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
+
+    L.control.scale().addTo(this.map);
 
     // Agregar layers groups al mapa
     this.pozosLayer.addTo(this.map);
