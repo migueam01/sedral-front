@@ -1,3 +1,19 @@
 <div class="container">
+    <!-- Barra superior centrada -->
+    <div class="map-toolbar">
+        <button mat-raised-button color="primary" [class.active]="modoSeleccion" (click)="activarSeleccion()">
+            <mat-icon>touch_app</mat-icon> Activar selección
+        </button>
+
+        <button mat-raised-button color="warn" (click)="cancelarSeleccion()">
+            <mat-icon>close</mat-icon> Cancelar selección
+        </button>
+
+        <button mat-raised-button color="accent" (click)="abrirPerfil()">
+            <mat-icon>show_chart</mat-icon> Dibujar perfil
+        </button>
+    </div>
+
+    <!-- Contenedor del mapa -->
     <div id="map"></div>
 </div>

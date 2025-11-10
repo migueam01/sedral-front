@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Perfil Hidráulico</h2>
+<mat-dialog-content>
+  <div class="zoom-control">
+    <button mat-mini-fab color="warn" (click)="resetZoom()" [disabled]="!isZoomed" matTooltip="Restablecer zoom"
+      class="zoom-reset-btn">
+      <mat-icon>restore</mat-icon>
+    </button>
+  </div>
+  <div class="chart-container">
+    <canvas id="perfilCanvas"></canvas>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

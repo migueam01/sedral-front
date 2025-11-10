@@ -6,6 +6,8 @@ import { TuberiaService } from '../../_service/tuberia.service';
 import { PozoMapa } from '../../_model/pozo-mapa';
 import Swal from 'sweetalert2';
 import { TuberiaMapa } from '../../_model/tuberia-mapa';
+import { MatDialog } from '@angular/material/dialog';
+import { PerfilComponent } from '../perfil/perfil.component';
 
 @Component({
   selector: 'app-mapa',
@@ -20,7 +22,10 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
   private tuberiasLayer: L.LayerGroup = L.layerGroup();
 
   // Arrays para almacenar las referencias de los layers
-  private pozoMarkers: L.Marker[] = [];
+  //private pozoMarkers: L.Marker[] = []; quitado
+  private pozoMarkers: Map<number, L.CircleMarker> = new Map();  //añadido
+  private labelMarkers: L.Marker[] = []; //añadido
+
   private tuberiaPolylines: L.Polyline[] = [];
 
   pozos: PozoMapa[] = [];
@@ -29,7 +34,13 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
   private readonly TUBERIA_ANCHO = 3;
   private readonly FLECHA_TAMANO = '15px';
 
-  constructor(private pozoService: PozoService, private tuberiaService: TuberiaService) { }
+  //añadido
+  modoSeleccion = false;
+  private pozosSeleccionados: any[] = [];
+  //hasta aquí
+
+  //añadido el matdialog
+  constructor(private pozoService: PozoService, private tuberiaService: TuberiaService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.cargarDatos();
@@ -47,8 +58,8 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [-0.752818771, -77.4729547],
-      zoom: 13,
+      center: [0.800366, -77.853904],
+      zoom: 15,
       minZoom: 2,
       maxZoom: 22,
     });
@@ -114,7 +125,12 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
   private dibujarPozos(pozos: PozoMapa[]): void {
     // Limpiar layer anterior
     this.pozosLayer.clearLayers();
-    this.pozoMarkers = [];
+    //this.pozoMarkers = []; quitado
+    //añadido
+    this.clearLabelMarkers();
+    this.pozoMarkers.clear();
+    this.pozosSeleccionados = [];
+    //hasta aquí
 
     pozos.forEach(pozo => {
       if (pozo.latitud && pozo.longitud) {
@@ -141,16 +157,26 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
         `;
 
         circle.bindPopup(popupContent);
+        //añadido
+        circle.on('click', (ev) => {
+          if (this.modoSeleccion) {
+            this.toggleSeleccionPozo(pozo, circle);
+          } else {
+            circle.openPopup();
+          }
+        });
+        //hasta aquí
         circle.addTo(this.pozosLayer);
-        this.pozoMarkers.push(circle as any); // Guardar referencia
+        this.pozoMarkers.set(pozo.idPozo, circle); //añadido
+        //this.pozoMarkers.push(circle as any); // Guardar referencia, quitado
       }
     });
 
     // Ajustar el zoom para mostrar todos los pozos
-    if (this.pozoMarkers.length > 0) {
+    /*if (this.pozoMarkers.length > 0) {
       const bounds = this.calculateMarkerBounds(this.pozoMarkers);
       this.map.fitBounds(bounds, { padding: [50, 50] });
-    }
+    } quitado*/
   }
 
   private dibujarTuberias(tuberias: TuberiaMapa[]): void {
@@ -188,15 +214,99 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
             <h4>Tubería #${tuberia.idTuberia}</h4>
             <p><strong>Material:</strong> ${tuberia.material || 'N/A'}</p>
             <p><strong>Diámetro:</strong> ${tuberia.diametro || 'N/A'} m</p>
-            <p><strong>Longitud:</strong> ${tuberia.coordenadas.length}</p>
           </div>
         `;
 
         polyline.bindPopup(popupContent);
+        polyline.on('click', () => {
+          if (this.modoSeleccion) {
+            polyline.openPopup();
+          }
+        })
         polyline.addTo(this.tuberiasLayer);
         this.tuberiaPolylines.push(polyline); // Guardar referencia
       }
     });
+  }
+
+  private toggleSeleccionPozo(pozo: PozoMapa, marker: L.CircleMarker): void {
+    const indice = this.pozosSeleccionados.indexOf(pozo.idPozo);
+    if (indice === -1) {
+      this.pozosSeleccionados.push(pozo.idPozo);
+      marker.setStyle({ color: 'red', fillColor: '#ff6666' });
+      this.addOrderLabel(marker.getLatLng(), this.pozosSeleccionados.length);
+    } else {
+      this.pozosSeleccionados.splice(indice, 1);
+      marker.setStyle({ color: '#0066cc', fillColor: '#3399ff' })
+      this.redrawOrderLabels();
+    }
+  }
+
+  private addOrderLabel(latLng: L.LatLng, order: number): void {
+    const label = L.divIcon({
+      className: 'pozo-order-label',
+      html: `<div class="label-circle">${order}</div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+    const m = L.marker(latLng, { icon: label, interactive: false }).addTo(this.map);
+    this.labelMarkers.push(m);
+  }
+
+  private clearLabelMarkers(): void {
+    this.labelMarkers.forEach(m => m.remove());
+    this.labelMarkers = [];
+  }
+
+  private redrawOrderLabels(): void {
+    this.clearLabelMarkers();
+    this.pozosSeleccionados.forEach((id, indice) => {
+      const marker = this.pozoMarkers.get(id);
+      if (marker) {
+        this.addOrderLabel(marker.getLatLng(), indice + 1);
+      }
+    });
+
+    this.pozoMarkers.forEach((marker, id) => {
+      if (!this.pozosSeleccionados.includes(id)) {
+        marker.setStyle({ color: '#0066cc', fillColor: '#3399ff' });
+      } else {
+        marker.setStyle({ color: 'red', fillColor: '#ff6666' });
+      }
+    });
+  }
+
+  activarSeleccion(): void {
+    this.modoSeleccion = true;
+    this.pozosSeleccionados = [];
+    Swal.fire('Modo selección activado', 'Haz clic en los pozos para el perfil hidráulico', 'info');
+  }
+
+  cancelarSeleccion(): void {
+    this.modoSeleccion = false;
+    this.pozosSeleccionados = [];
+    this.clearLabelMarkers();
+
+    this.pozoMarkers.forEach(marker => marker.setStyle({ color: '#0066cc', fillColor: '#3399ff' }));
+  }
+
+  abrirPerfil(): void {
+    if (this.pozosSeleccionados.length < 2) {
+      Swal.fire('Advertencia', 'Seleccione al menos dos pozos', 'warning');
+      return;
+    }
+    console.log('Lista de pozos en el mapa ' + this.pozosSeleccionados);
+
+    this.dialog.open(PerfilComponent, {
+      width: '95vw',
+      height: '85vh',
+      maxWidth: '1200px',
+      maxHeight: '800px',
+      panelClass: 'large-perfil-dialog',
+      data: { idsPozos: this.pozosSeleccionados }
+    });
+
+    this.cancelarSeleccion();
   }
 
   // Método para calcular bounds de markers
@@ -293,7 +403,7 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
     }
   }
 
-  fitToPozos(): void {
+  /*fitToPozos(): void {
     if (this.pozoMarkers.length > 0) {
       const bounds = this.calculateMarkerBounds(this.pozoMarkers);
       this.map.fitBounds(bounds, { padding: [20, 20] });
@@ -312,5 +422,5 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
       const bounds = this.calculateAllBounds();
       this.map.fitBounds(bounds, { padding: [20, 20] });
     }
-  }
+  }*/
 }

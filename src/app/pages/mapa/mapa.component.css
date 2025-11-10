@@ -1,3 +1,17 @@
+/* Barra superior centrada */
+.map-toolbar {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+    padding: 10px 20px;
+    align-items: center;
+}
+
+/* Mapa */
 #map {
     position: absolute;
     top: 0;
@@ -6,4 +20,44 @@
     height: 100%;
     margin: 0 auto;
     z-index: 1;
+}
+
+/* Botones y íconos */
+.map-toolbar button {
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.map-toolbar mat-icon {
+    margin-right: 6px;
+}
+
+/* 💡 Estilo para el botón activo */
+button.active {
+    background-color: #1976d2 !important;
+    /* Azul más intenso */
+    color: white !important;
+    box-shadow: 0 0 10px rgba(25, 118, 210, 0.6);
+    transform: scale(1.03);
+}
+
+/* etiqueta circular con número */
+.pozo-order-label .label-circle {
+    background: #d32f2f;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 600;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.large-perfil-dialog .mat-dialog-container {
+    padding: 10px;
+    overflow: hidden;
 }

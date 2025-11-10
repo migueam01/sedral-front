@@ -24,6 +24,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardTuberiasComponent } from './pages/dashboard-tuberias/dashboard-tuberias.component';
 import { DashboardPozosComponent } from './pages/dashboard-pozos/dashboard-pozos.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { DashboardPozosComponent } from './pages/dashboard-pozos/dashboard-pozos
     ResponsableDialogoComponent,
     DashboardComponent,
     DashboardTuberiasComponent,
-    DashboardPozosComponent
+    DashboardPozosComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,
