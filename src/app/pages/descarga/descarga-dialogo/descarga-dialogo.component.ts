@@ -54,7 +54,6 @@ export class DescargaDialogoComponent implements OnInit {
   operar() {
     this.descarga.nombre = this.form.value['nombre'];
     this.descarga.ubicacion = this.form.value['ubicacion'];
-    this.descarga.sincronizado = false;
     if (this.edicion) {
       this.descarga.idDescarga = this.form.value['idDescarga'];
       this.service.modificar(this.descarga).subscribe(() => {

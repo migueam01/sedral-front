@@ -1,5 +1,3 @@
-/*CSS principal que si funciona*/
-
 .sidenav-container {
     height: 100vh;
 }
@@ -42,6 +40,12 @@ mat-nav-list a:hover {
     padding: 16px;
 }
 
+.content.full-height {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
 .toolbar {
     display: flex;
     justify-content: center;
@@ -50,18 +54,12 @@ mat-nav-list a:hover {
 }
 
 .titulo {
-    /* Requerido para navegadores basados en WebKit */
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    /* Compatibilidad WebKit */
     -webkit-line-clamp: 2;
-    /* Propiedad estándar */
     line-clamp: 2;
-    /* Estándar */
     box-orient: vertical;
-    /* Oculta el exceso */
     overflow: hidden;
-    /* Muestra los "..." */
     text-overflow: ellipsis;
     white-space: normal;
 }

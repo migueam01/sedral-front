@@ -9,7 +9,6 @@ export class Tuberia {
     material!: string;
     flujo!: string;
     funciona!: string;
-    sincronizado!: boolean;
     pozoInicio!: Pozo;
     pozoFin!: Pozo;
 }

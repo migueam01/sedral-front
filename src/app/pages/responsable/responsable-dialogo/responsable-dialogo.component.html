@@ -24,12 +24,106 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input matInput placeholder="Ingrese nombre de usuario" required formControlName="username">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
                     <mat-label>Teléfono</mat-label>
                     <input matInput placeholder="Ingrese teléfono" required formControlName="telefono">
                 </mat-form-field>
 
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Correo</mat-label>
+                    <input matInput placeholder="Ingrese correo electrónico" required formControlName="correo">
+                </mat-form-field>
+
+                @if(!edicion){
+                <mat-form-field appearance="outline">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput placeholder="Ingrese contraseña" required formControlName="password">
+                </mat-form-field>
+                }
+
+                @if(edicion){
+                <mat-checkbox formControlName="cambiarPassword">
+                    Cambiar contraseña
+                </mat-checkbox>
+                }
+
+                @if(edicion && form.get('cambiarPassword')?.value){
+                <mat-form-field appearance="outline">
+                    <mat-label>Nueva contraseña</mat-label>
+                    <input matInput placeholder="Ingrese contraseña" formControlName="password">
+                </mat-form-field>
+                }
+
+                <div class="roles-section">
+                    <div class="roles-header">
+                        <mat-label class="roles-label">Roles del usuario</mat-label>
+                        <!-- Opción para seleccionar todos -->
+                        @if(roles.length > 0){
+                        <div class="select-all-container">
+                            <mat-checkbox [checked]="estanTodosSeleccionados()" (change)="seleccionarTodos($event)"
+                                color="primary">
+                                Seleccionar todos
+                            </mat-checkbox>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Lista de roles-->
+                    <div class="roles-checkbox-container">
+                        @for(rol of roles; track rol.idRol){
+                        <div class="role-item">
+                            <mat-checkbox [checked]="isRoleSelected(rol.idRol)"
+                                (change)="onRoleChange(rol.idRol, $event)" color="primary" class="role-checkbox">
+                                <div class="role-content">
+                                    <div class="role-name">{{rol.nombre}}</div>
+                                    <div class="role-description">
+                                        {{rol.descripcion}}
+                                    </div>
+                                </div>
+                            </mat-checkbox>
+                        </div>
+                        }
+                    </div>
+
+                    <!-- Información de selección -->
+                    <div class="selection-info">
+                        @if(rolesSeleccionados.length > 0){
+                        <div class="selected-count">
+                            <mat-icon class="success-icon">check_circle</mat-icon>
+                            <span>{{rolesSeleccionados.length}} rol(es) seleccionado(s)</span>
+                        </div>
+                        }
+
+                        @if(rolesSeleccionados.length === 0 && roles.length > 0){
+                        <div class="no-selection">
+                            <mat-icon class="warning-icon">info</mat-icon>
+                            <span>No hay roles seleccionados</span>
+                        </div>
+                        }
+
+                        @if(roles.length===0){
+                        <div class="no-roles">
+                            <mat-icon class="error-icon">warning</mat-icon>
+                            <span>No hay roles disponibles en el sistema</span>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                @if(!rolesCargados){
+                <div class="loading-roles">
+                    <mat-spinner diameter="30"></mat-spinner>
+                    <span>Cargando roles...</span>
+                </div>
+                }
+
                 <mat-card-actions class="button-group">
-                    <button mat-raised-button color="primary" type="submit" [disabled]="frmResponsable.invalid">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="frmResponsable.invalid || !rolesCargados">
                         <mat-icon>done</mat-icon>
                         <span>Aceptar</span>
                     </button>

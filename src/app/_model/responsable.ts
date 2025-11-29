@@ -1,7 +1,13 @@
+import { Rol } from "./rol";
+
 export class Responsable {
     idResponsable!: number;
     nombre!: string;
     apellido!: string;
+    username!: string;
+    password!: string;
     telefono!: string;
-    sincronizado!: boolean;
+    habilitado!: boolean;
+    correo!: string;
+    roles: Rol[] = [];
 }

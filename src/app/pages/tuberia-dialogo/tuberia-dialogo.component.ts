@@ -152,7 +152,6 @@ export class TuberiaDialogoComponent implements OnInit {
     this.tuberia.diametro = this.form.value['diametro'];
     this.tuberia.material = this.form.value['material'];
     this.tuberia.funciona = this.form.value['funciona'];
-    this.tuberia.sincronizado = false;
     if (this.edicion) {
       this.tuberia.idTuberia = this.form.value['idTuberia'];
       this.tuberiaService.modificar(this.tuberia).subscribe(() => {

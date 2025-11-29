@@ -28,7 +28,6 @@ export class Pozo {
     calleNS!: string;
     observacion!: string;
     pathMedia!: string;
-    sincronizado!: boolean;
     actividadCompletada!: number;
     sector!: Sector;
     responsable!: Responsable;

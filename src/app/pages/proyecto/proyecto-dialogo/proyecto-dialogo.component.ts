@@ -70,7 +70,6 @@ export class ProyectoDialogoComponent implements OnInit {
     this.proyecto.nombre = this.form.value['nombre'];
     this.proyecto.alias = this.form.value['alias'];
     gadmEnviar.idGadm = this.form.value['gadmSelect'];
-    this.proyecto.sincronizado = false;
     this.proyecto.gadm = gadmEnviar;
     if (this.edicion) {
       this.proyecto.idProyecto = this.form.value['idProyecto'];

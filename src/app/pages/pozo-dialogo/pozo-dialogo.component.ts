@@ -203,7 +203,6 @@ export class PozoDialogoComponent implements OnInit {
     this.pozo.observacion = this.terceraPantallaForm.value['observacion'];
     this.pozo.actividadCompletada = 5;
     this.pozo.pathMedia = 'localhost';
-    this.pozo.sincronizado = false;
 
     if (this.edicion) {
       this.pozo.idPozo = this.primeraPantallaForm.value['idPozo'];

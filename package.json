@@ -28,6 +28,8 @@
     "@angular/material": "^20.2.1",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
+    "@auth0/angular-jwt": "^5.2.0",
+    "@fortawesome/angular-fontawesome": "^3.0.0",
     "chart.js": "^4.5.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "chartjs-plugin-zoom": "^2.2.0",

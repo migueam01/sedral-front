@@ -1,0 +1,35 @@
+table {
+    width: 100%;
+}
+
+.mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+td,
+th {
+    width: 25%;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.btn-editar {
+    color: #2375c7 !important;
+}
+
+.btn-eliminar {
+    color: #df2b2b !important;
+}
+
+.btn-editar:hover {
+    background-color: rgba(25, 118, 210, 0.1) !important;
+}
+
+.btn-eliminar:hover {
+    background-color: rgba(211, 47, 47, 0.1) !important;
+}

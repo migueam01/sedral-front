@@ -67,7 +67,6 @@ export class SectorDialogoComponent implements OnInit {
     let proyectoEnviar = new Proyecto();
     this.sector.nombre = this.form.value['nombre'];
     proyectoEnviar.idProyecto = this.form.value['proyectoSelect'];
-    this.sector.sincronizado = false;
     this.sector.proyecto = proyectoEnviar;
     if (this.edicion) {
       this.sector.idSector = this.form.value['idSector'];

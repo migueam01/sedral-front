@@ -22,7 +22,7 @@
     z-index: 1;
 }
 
-/* Botones y íconos */
+/* Botones e íconos */
 .map-toolbar button {
     font-size: 14px;
     font-weight: 500;
@@ -34,7 +34,7 @@
     margin-right: 6px;
 }
 
-/* 💡 Estilo para el botón activo */
+/*Estilo para el botón activo */
 button.active {
     background-color: #1976d2 !important;
     /* Azul más intenso */

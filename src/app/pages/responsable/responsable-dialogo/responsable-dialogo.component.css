@@ -2,7 +2,6 @@ mat-card {
     max-width: 700px;
     margin: 30px auto;
     padding: 20px;
-    /* centra horizontalmente */
     align-items: stretch;
     display: flex;
     flex-direction: column;
@@ -15,24 +14,20 @@ mat-card {
 
 .header-centrado {
     display: flex;
-    /* centra horizontalmente los hijos */
     justify-content: center;
 }
 
 .header-centrado mat-card-title {
-    /* Centra el texto dentro del título */
     text-align: center;
 }
 
 .form-field {
-    /* hace que cada input ocupe todo el ancho */
     width: 100%;
     margin-bottom: 1rem;
 }
 
 .actions-container {
     display: flex;
-    /* centra el botón horizontalmente */
     justify-content: center;
 }
 
@@ -40,50 +35,226 @@ mat-card {
     padding-top: 10px;
 }
 
-/* Contenedor de botones centrado */
 .button-group {
     display: flex;
-    /* centra los botones horizontalmente */
     justify-content: center;
-    /* separación entre botones */
     gap: 16px;
-    /* en pantallas pequeñas los botones bajan de línea */
     flex-wrap: wrap;
 }
 
 .contenedor-elementos {
-    /* ancho máximo en pantallas grandes */
     max-width: 100%;
-    /* ocupa todo el ancho posible */
     width: 100%;
-    /* centrado horizontal */
     margin: 20px auto;
-    /* Separación interna */
     padding: 20px;
     display: flex;
     flex-direction: column;
 
     background-color: rgba(255, 255, 255);
-    /*background-color: rgba(250, 249, 253);   parecido al stepper*/
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* evita que padding rompa el ancho */
     box-sizing: border-box;
-    /* separa los campos verticalmente */
     gap: 16px
 }
 
-/* Campos del formulario ocupan todo el ancho */
 .contenedor-elementos mat-form-field {
     width: 100%;
     box-sizing: border-box;
 }
 
-/* Ajustes para pantallas pequeñas */
+/* Estilos para la sección de roles */
+.roles-section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.roles-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.roles-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.select-all-container {
+    display: flex;
+    align-items: center;
+}
+
+.roles-checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 12px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.role-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.role-item:hover {
+    background-color: #f5f5f5;
+}
+
+.role-checkbox {
+    width: 100%;
+}
+
+.role-content {
+    margin-left: 8px;
+}
+
+.role-name {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.87);
+    margin-bottom: 2px;
+}
+
+.role-description {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    line-height: 1.3;
+}
+
+.selection-info {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 4px;
+}
+
+.selected-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #e8f5e8;
+    border: 1px solid #c8e6c9;
+    border-radius: 4px;
+    color: #2e7d32;
+    font-size: 14px;
+}
+
+.no-selection {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #fff3e0;
+    border: 1px solid #ff8480;
+    border-radius: 4px;
+    color: #ef0000;
+    font-size: 14px;
+}
+
+.no-roles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+    color: #c62828;
+    font-size: 14px;
+}
+
+.success-icon {
+    color: #2e7d32;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.warning-icon {
+    color: #ef0000;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.error-icon {
+    color: #c62828;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.roles-checkbox-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.roles-checkbox-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.roles-checkbox-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.roles-checkbox-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.loading-roles {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    color: #666;
+    font-size: 14px;
+}
+
+.loading-roles mat-spinner {
+    margin: 0;
+}
+
 @media (max-width: 600px) {
     .contenedor-elementos {
         padding: 12px;
         margin: 10px 0;
         border-radius: 0;
+    }
+
+    .roles-section {
+        padding: 16px;
+        margin: 16px 0;
+    }
+
+    .roles-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .roles-checkbox-container {
+        max-height: 200px;
+    }
+
+    .role-item {
+        padding: 6px;
     }
 }

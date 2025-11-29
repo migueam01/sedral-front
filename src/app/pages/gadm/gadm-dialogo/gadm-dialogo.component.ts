@@ -55,8 +55,6 @@ export class GadmDialogoComponent implements OnInit {
   operar() {
     this.gadm.nombre = this.form.value['nombre'];
     this.gadm.alias = this.form.value['alias'];
-    this.gadm.sincronizado = false;
-    this.gadm.eliminado = false;
     if (this.edicion) {
       this.gadm.idGadm = this.form.value['idGadm'];
       this.gadmService.modificar(this.gadm).subscribe(() => {

@@ -20,11 +20,19 @@ import { ProyectoDialogoComponent } from './pages/proyecto/proyecto-dialogo/proy
 import { ResponsableDialogoComponent } from './pages/responsable/responsable-dialogo/responsable-dialogo.component';
 import { MaterialModule } from "./material/material.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { DashboardTuberiasComponent } from './pages/dashboard-tuberias/dashboard-tuberias.component';
 import { DashboardPozosComponent } from './pages/dashboard-pozos/dashboard-pozos.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { LoginComponent } from './login/login.component';
+import { tokenInterceptor } from './_interceptor/token.interceptor';
+import { Error401Component } from './pages/error-401/error-401.component';
+import { Error404Component } from './pages/error-404/error-404.component';
+import { Error500Component } from './pages/error-500/error-500.component';
+import { ServerErrorsInterceptor } from './_interceptor/server-errors.interceptor';
+import { RolComponent } from './pages/rol/rol.component';
+import { RolDialogoComponent } from './pages/rol/rol-dialogo/rol-dialogo.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +55,13 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     DashboardComponent,
     DashboardTuberiasComponent,
     DashboardPozosComponent,
-    PerfilComponent
+    PerfilComponent,
+    LoginComponent,
+    Error401Component,
+    Error404Component,
+    Error500Component,
+    RolComponent,
+    RolDialogoComponent
   ],
   imports: [
     BrowserModule,
@@ -56,11 +70,18 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideZonelessChangeDetection(),
-    provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch())
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ServerErrorsInterceptor,
+    multi: true,
+  },
+  provideBrowserGlobalErrorListeners(),
+  provideZonelessChangeDetection(),
+  provideClientHydration(withEventReplay()),
+  provideHttpClient(
+    withFetch(),
+    withInterceptors([tokenInterceptor])
+  )
   ],
   bootstrap: [App]
 })

@@ -23,8 +23,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatExpansionModule } from '@angular/material/expansion';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [],
@@ -53,7 +56,10 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   exports: [
     MatButtonModule,
@@ -79,7 +85,10 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
     MatListModule,
     MatTooltipModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: MatPaginatorIntl, useClass: MatPaginatorImpl },

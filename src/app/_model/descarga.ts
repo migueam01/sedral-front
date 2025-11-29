@@ -5,5 +5,4 @@ export class Descarga {
     norte!: number;
     este!: number;
     cota!: number;
-    sincronizado!: boolean;
 }
