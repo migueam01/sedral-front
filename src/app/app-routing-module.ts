@@ -24,6 +24,7 @@ import { Error401Component } from './pages/error-401/error-401.component';
 import { Error404Component } from './pages/error-404/error-404.component';
 import { RolComponent } from './pages/rol/rol.component';
 import { RolDialogoComponent } from './pages/rol/rol-dialogo/rol-dialogo.component';
+import { CalculoHidraulicoComponent } from './pages/calculo-hidraulico/calculo-hidraulico.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,7 @@ const routes: Routes = [
       { path: "resumen-pz", component: DashboardPozosComponent }
     ], canActivate: [GuardService]
   },
+  { path: "calculos", component: CalculoHidraulicoComponent, canActivate: [GuardService] },
   { path: "error-401", component: Error401Component },
   { path: "error-404", component: Error404Component },
   { path: "login", component: LoginComponent },

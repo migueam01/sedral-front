@@ -68,6 +68,8 @@ export class App implements OnInit {
       this.seccionActual = 'RED DE ALCANTARILLADO SANITARIO - ROL'
     } else if (url.includes('mapa')) {
       this.seccionActual = '';
+    } else if (url.includes('calculo')) {
+      this.seccionActual = 'RED DE ALCANTARILLADO SANITARIO - CÁLCULOS HIDRÁULICOS'
     } else {
       this.seccionActual = ''
     }

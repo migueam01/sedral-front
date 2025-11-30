@@ -33,6 +33,7 @@ import { Error500Component } from './pages/error-500/error-500.component';
 import { ServerErrorsInterceptor } from './_interceptor/server-errors.interceptor';
 import { RolComponent } from './pages/rol/rol.component';
 import { RolDialogoComponent } from './pages/rol/rol-dialogo/rol-dialogo.component';
+import { CalculoHidraulicoComponent } from './pages/calculo-hidraulico/calculo-hidraulico.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { RolDialogoComponent } from './pages/rol/rol-dialogo/rol-dialogo.compone
     Error404Component,
     Error500Component,
     RolComponent,
-    RolDialogoComponent
+    RolDialogoComponent,
+    CalculoHidraulicoComponent
   ],
   imports: [
     BrowserModule,
