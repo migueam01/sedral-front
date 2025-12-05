@@ -4,7 +4,9 @@ export class TuberiaMapa {
     idTuberia!: number;
     diametro!: number;
     material!: string;
-    flujo!: string;
     funciona!: string;
     coordenadas!: Coordenada[];
+    pendiente!: number;
+    velocidad!: number;
+    caudal!: number;
 }

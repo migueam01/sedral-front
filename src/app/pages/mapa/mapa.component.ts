@@ -21,10 +21,8 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
   private pozosLayer: L.LayerGroup = L.layerGroup();
   private tuberiasLayer: L.LayerGroup = L.layerGroup();
 
-  // Arrays para almacenar las referencias de los layers
-  //private pozoMarkers: L.Marker[] = []; quitado
-  private pozoMarkers: Map<number, L.CircleMarker> = new Map();  //añadido
-  private labelMarkers: L.Marker[] = []; //añadido
+  private pozoMarkers: Map<number, L.CircleMarker> = new Map();
+  private labelMarkers: L.Marker[] = [];
 
   private tuberiaPolylines: L.Polyline[] = [];
 
@@ -34,12 +32,8 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
   private readonly TUBERIA_ANCHO = 3;
   private readonly FLECHA_TAMANO = '15px';
 
-  //añadido
   modoSeleccion = false;
   private pozosSeleccionados: any[] = [];
-  //hasta aquí
-
-  //añadido el matdialog
   constructor(private pozoService: PozoService, private tuberiaService: TuberiaService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -125,12 +119,9 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
   private dibujarPozos(pozos: PozoMapa[]): void {
     // Limpiar layer anterior
     this.pozosLayer.clearLayers();
-    //this.pozoMarkers = []; quitado
-    //añadido
     this.clearLabelMarkers();
     this.pozoMarkers.clear();
     this.pozosSeleccionados = [];
-    //hasta aquí
 
     pozos.forEach(pozo => {
       if (pozo.latitud && pozo.longitud) {
@@ -157,7 +148,6 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
         `;
 
         circle.bindPopup(popupContent);
-        //añadido
         circle.on('click', (ev) => {
           if (this.modoSeleccion) {
             this.toggleSeleccionPozo(pozo, circle);
@@ -165,10 +155,8 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
             circle.openPopup();
           }
         });
-        //hasta aquí
         circle.addTo(this.pozosLayer);
-        this.pozoMarkers.set(pozo.idPozo, circle); //añadido
-        //this.pozoMarkers.push(circle as any); // Guardar referencia, quitado
+        this.pozoMarkers.set(pozo.idPozo, circle);
       }
     });
 
@@ -213,7 +201,11 @@ export class MapaComponent implements AfterViewInit, OnInit, OnDestroy {
           <div class="popup-content">
             <h4>Tubería #${tuberia.idTuberia}</h4>
             <p><strong>Material:</strong> ${tuberia.material || 'N/A'}</p>
-            <p><strong>Diámetro:</strong> ${tuberia.diametro || 'N/A'} m</p>
+            <p><strong>Diámetro:</strong> ${tuberia.diametro || 'N/A'} mm</p>
+            <p><strong>Funciona:</strong> ${tuberia.funciona || 'N/A'}</p>
+            <p><strong>Pendiente:</strong> ${tuberia.pendiente}</p>
+            <p><strong>Velocidad:</strong> ${tuberia.velocidad} m/s</p>
+            <p><strong>Caudal:</strong> ${tuberia.caudal} l/s</p>
           </div>
         `;
 
