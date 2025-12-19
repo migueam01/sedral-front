@@ -137,12 +137,6 @@ export class TuberiaDialogoComponent implements OnInit {
   }
 
   aceptar() {
-    /*let pozoInicioEnviar = new Pozo();
-    let pozoFinEnviar = new Pozo();
-    pozoInicioEnviar.idPozo = this.form.value['pozoInicio'];
-    this.tuberia.pozoInicio = pozoInicioEnviar;
-    pozoFinEnviar.idPozo = this.form.value['pozoFin'];
-    this.tuberia.pozoFin = pozoFinEnviar;*/
     this.tuberia.pozoInicio = this.form.value['pozoInicio'];
     this.tuberia.pozoFin = this.form.value['pozoFin'];
     this.tuberia.orientacion = this.form.value['orientacion'];
