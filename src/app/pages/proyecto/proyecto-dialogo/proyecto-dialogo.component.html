@@ -34,6 +34,16 @@
                     </mat-select>
                 </mat-form-field>
 
+                <mat-form-field appearance="outline" class="margen-top form-field">
+                    <mat-label>Dotación (l/hab/dia)</mat-label>
+                    <input matInput placeholder="Ingrese dotación" required formControlName="dotacion">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="margen-top form-field">
+                    <mat-label>Población (hab)</mat-label>
+                    <input matInput placeholder="Ingrese población" required formControlName="poblacion">
+                </mat-form-field>
+
                 <mat-card-actions class="button-group">
                     <button mat-raised-button color="primary" type="submit" [disabled]="frmProyecto.invalid">
                         <mat-icon>done</mat-icon>

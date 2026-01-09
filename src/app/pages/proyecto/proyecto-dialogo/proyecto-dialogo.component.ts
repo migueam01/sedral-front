@@ -32,7 +32,9 @@ export class ProyectoDialogoComponent implements OnInit {
       'idProyecto': new FormControl(0),
       'nombre': new FormControl(''),
       'alias': new FormControl(''),
-      'gadmSelect': new FormControl('')
+      'gadmSelect': new FormControl(''),
+      'dotacion': new FormControl(0),
+      'poblacion': new FormControl(0)
     });
 
     this.route.params.subscribe((params: Params) => {
@@ -53,7 +55,9 @@ export class ProyectoDialogoComponent implements OnInit {
           'idProyecto': proyectoSelect.idProyecto,
           'nombre': proyectoSelect.nombre,
           'alias': proyectoSelect.alias,
-          'gadmSelect': proyectoSelect.gadm.idGadm
+          'gadmSelect': proyectoSelect.gadm.idGadm,
+          'dotacion': proyectoSelect.dotacion,
+          'poblacion': proyectoSelect.poblacion
         });
       });
     } else {
@@ -70,6 +74,8 @@ export class ProyectoDialogoComponent implements OnInit {
     this.proyecto.nombre = this.form.value['nombre'];
     this.proyecto.alias = this.form.value['alias'];
     gadmEnviar.idGadm = this.form.value['gadmSelect'];
+    this.proyecto.dotacion = this.form.value['dotacion'];
+    this.proyecto.poblacion = this.form.value['poblacion'];
     this.proyecto.gadm = gadmEnviar;
     if (this.edicion) {
       this.proyecto.idProyecto = this.form.value['idProyecto'];

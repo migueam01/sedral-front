@@ -73,12 +73,12 @@
 
                 <div class="row margen-top">
                     <mat-form-field appearance="outline" class="flex-item">
-                        <mat-label>Altura de la base</mat-label>
+                        <mat-label>Altura de la base (m)</mat-label>
                         <input matInput placeholder="Ingrese altura" required formControlName="hBase">
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="flex-item">
-                        <mat-label>Altura a la corona</mat-label>
+                        <mat-label>Altura a la corona (m)</mat-label>
                         <input matInput placeholder="Ingrese altura" required formControlName="hCorona">
                     </mat-form-field>
                 </div>
@@ -91,13 +91,24 @@
                     </button>
 
                     <mat-form-field appearance="outline">
-                        <mat-label>Diámetro</mat-label>
-                        <input matInput type="number" readonly placeholder="Diámetro" required
-                            formControlName="diametro">
+                        <mat-label>Diámetro (mm)</mat-label>
+                        <input matInput type="number" readonly placeholder="Diámetro" formControlName="diametro">
                     </mat-form-field>
                 </div>
 
-                <mat-form-field appearance="outline" class="form-field">
+                <div class="row margen-top">
+                    <mat-form-field appearance="outline" class="flex-item">
+                        <mat-label>Calado (m)</mat-label>
+                        <input matInput placeholder="Ingrese calado" required formControlName="calado">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="flex-item">
+                        <mat-label>Área de aporte (Ha)</mat-label>
+                        <input matInput placeholder="Ingrese área de aporte" required formControlName="areaAporte">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field appearance="outline" class="form-field margen-top">
                     <mat-label>Material</mat-label>
                     <mat-select formControlName="material" required>
                         @for ( m of materiales ; track m) {

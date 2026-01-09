@@ -47,6 +47,8 @@ export class TuberiaDialogoComponent implements OnInit {
       'hCorona': new FormControl(0),
       'diametro': new FormControl(0),
       'material': new FormControl(''),
+      'calado': new FormControl(0),
+      'areaAporte': new FormControl(0),
       'funciona': new FormControl('')
     });
     this.route.params.subscribe((params: Params) => {
@@ -73,6 +75,8 @@ export class TuberiaDialogoComponent implements OnInit {
           'hCorona': tuberiaBusqueda.corona,
           'diametro': tuberiaBusqueda.diametro,
           'material': tuberiaBusqueda.material,
+          'calado': tuberiaBusqueda.calado,
+          'areaAporte': tuberiaBusqueda.areaAporte,
           'funciona': tuberiaBusqueda.funciona
         });
         this.filteredOptionsInicio = this.myControlInicio.valueChanges.pipe(
@@ -145,6 +149,8 @@ export class TuberiaDialogoComponent implements OnInit {
     this.tuberia.corona = this.form.value['hCorona'];
     this.tuberia.diametro = this.form.value['diametro'];
     this.tuberia.material = this.form.value['material'];
+    this.tuberia.calado = this.form.value['calado'];
+    this.tuberia.calado = this.form.value['areaAporte'];
     this.tuberia.funciona = this.form.value['funciona'];
     if (this.edicion) {
       this.tuberia.idTuberia = this.form.value['idTuberia'];

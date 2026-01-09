@@ -19,7 +19,7 @@ export class CalculoService {
     return this.http.get<CalculoHidraulico[]>(`${this.url}`);
   }
 
-  public realizarCalculos(idProyecto: number): Observable<CalculoHidraulico[]> {
-    return this.http.post<CalculoHidraulico[]>(`${this.url}/${idProyecto}`, null);
+  public realizarCalculos(idProyecto: number) {
+    return this.http.post(`${this.url}/${idProyecto}`, null);
   }
 }

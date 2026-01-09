@@ -3,7 +3,14 @@ export interface CalculoHidraulico {
     idTuberia: number,
     nombrePozoInicio: string,
     nombrePozoFin: string,
+    diametro: number,
+    material: string,
+    calado: number,
+    manning: number,
     pendiente: number,
     velocidad: number,
-    caudal: number
+    caudal: number,
+    relacionCaudal: number,
+    relacionVelocidad: number,
+    relacionArea: number
 }

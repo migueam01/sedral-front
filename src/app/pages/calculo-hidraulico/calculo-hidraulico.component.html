@@ -14,15 +14,9 @@
 
     <div class="table-container">
         <table matSort mat-table [dataSource]="dataSource">
-            <!-- Columna código cálculo hidráulico -->
-            <ng-container matColumnDef="idCalculo">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Código Cálculo</th>
-                <td mat-cell *matCellDef="let element"> {{element.idCalculo}} </td>
-            </ng-container>
-
-            <!-- Columna código cálculo tubería -->
+            <!-- Columna id tubería -->
             <ng-container matColumnDef="idTuberia">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Código Tubería</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID Tubería </th>
                 <td mat-cell *matCellDef="let element"> {{element.idTuberia}} </td>
             </ng-container>
 
@@ -38,22 +32,64 @@
                 <td mat-cell *matCellDef="let element"> {{element.nombrePozoFin}} </td>
             </ng-container>
 
+            <!-- Columna diámetro -->
+            <ng-container matColumnDef="diametro">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Diámetro (mm) </th>
+                <td mat-cell *matCellDef="let element"> {{element.diametro}} </td>
+            </ng-container>
+
+            <!-- Columna material -->
+            <ng-container matColumnDef="material">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Material </th>
+                <td mat-cell *matCellDef="let element"> {{element.material}} </td>
+            </ng-container>
+
+            <!-- Columna calado -->
+            <ng-container matColumnDef="calado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Calado (m)</th>
+                <td mat-cell *matCellDef="let element"> {{element.calado}} </td>
+            </ng-container>
+
+            <!-- Columna manning -->
+            <ng-container matColumnDef="manning">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Manning </th>
+                <td mat-cell *matCellDef="let element"> {{element.manning}} </td>
+            </ng-container>
+
             <!-- Columna pendiente -->
             <ng-container matColumnDef="pendiente">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pendiente </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pendiente (%)</th>
                 <td mat-cell *matCellDef="let element"> {{element.pendiente}} </td>
             </ng-container>
 
             <!-- Columna velocidad -->
             <ng-container matColumnDef="velocidad">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Velocidad </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Velocidad (m/s)</th>
                 <td mat-cell *matCellDef="let element"> {{element.velocidad}} </td>
             </ng-container>
 
             <!-- Columna caudal -->
             <ng-container matColumnDef="caudal">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Caudal </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Caudal (l/s)</th>
                 <td mat-cell *matCellDef="let element"> {{element.caudal}} </td>
+            </ng-container>
+
+            <!-- Columna relación caudal -->
+            <ng-container matColumnDef="relacionCaudal">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Relación caudal</th>
+                <td mat-cell *matCellDef="let element"> {{element.relacionCaudal}} </td>
+            </ng-container>
+
+            <!-- Columna relación velocidad -->
+            <ng-container matColumnDef="relacionVelocidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Relación velocidad</th>
+                <td mat-cell *matCellDef="let element"> {{element.relacionVelocidad}} </td>
+            </ng-container>
+
+            <!-- Columna relación área -->
+            <ng-container matColumnDef="relacionArea">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Relación área</th>
+                <td mat-cell *matCellDef="let element"> {{element.relacionArea}} </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

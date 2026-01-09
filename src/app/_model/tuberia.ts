@@ -7,8 +7,11 @@ export class Tuberia {
     corona!: number;
     diametro!: number;
     material!: string;
+    longitud!: number;
     flujo!: string;
     funciona!: string;
+    areaAporte!: number;
+    calado!: number;
     pozoInicio!: Pozo;
     pozoFin!: Pozo;
 }

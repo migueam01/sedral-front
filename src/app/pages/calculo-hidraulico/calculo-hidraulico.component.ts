@@ -15,7 +15,8 @@ import Swal from 'sweetalert2';
 export class CalculoHidraulicoComponent implements OnInit, AfterViewInit {
 
   public dataSource = new MatTableDataSource<CalculoHidraulico>([]);
-  public displayedColumns = ['idCalculo', 'idTuberia', 'nombrePozoInicio', 'nombrePozoFin', 'pendiente', 'velocidad', 'caudal'];
+  public displayedColumns = ['idTuberia', 'nombrePozoInicio', 'nombrePozoFin', 'diametro', 'material', 'calado', 'manning',
+    'pendiente', 'velocidad', 'caudal', 'relacionCaudal', 'relacionVelocidad', 'relacionArea'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
