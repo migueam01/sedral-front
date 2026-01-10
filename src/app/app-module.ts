@@ -34,6 +34,8 @@ import { ServerErrorsInterceptor } from './_interceptor/server-errors.intercepto
 import { RolComponent } from './pages/rol/rol.component';
 import { RolDialogoComponent } from './pages/rol/rol-dialogo/rol-dialogo.component';
 import { CalculoHidraulicoComponent } from './pages/calculo-hidraulico/calculo-hidraulico.component';
+import { LoadingComponent } from './pages/loading/loading.component';
+import { loadingInterceptor } from './_interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,8 @@ import { CalculoHidraulicoComponent } from './pages/calculo-hidraulico/calculo-h
     Error500Component,
     RolComponent,
     RolDialogoComponent,
-    CalculoHidraulicoComponent
+    CalculoHidraulicoComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -75,14 +78,14 @@ import { CalculoHidraulicoComponent } from './pages/calculo-hidraulico/calculo-h
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: ServerErrorsInterceptor,
-    multi: true,
+    multi: true
   },
   provideBrowserGlobalErrorListeners(),
   provideZonelessChangeDetection(),
   provideClientHydration(withEventReplay()),
   provideHttpClient(
     withFetch(),
-    withInterceptors([tokenInterceptor])
+    withInterceptors([tokenInterceptor, loadingInterceptor])
   )
   ],
   bootstrap: [App]
