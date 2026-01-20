@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 export class RolComponent implements OnInit, AfterViewInit {
 
   public dataSource = new MatTableDataSource<Rol>([]);
-  public displayedColumns = ['idRol', 'nombre', 'descripcion', 'acciones'];
+  public displayedColumns = ['idRol', 'nombre', 'descripcion', 'prioridad','acciones'];
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

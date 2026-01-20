@@ -25,6 +25,11 @@
                     <input matInput placeholder="Ingrese descripción" required formControlName="descripcion">
                 </mat-form-field>
 
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Prioridad</mat-label>
+                    <input matInput placeholder="Ingrese prioridad" required formControlName="prioridad">
+                </mat-form-field>
+
                 <mat-card-actions class="button-group">
                     <button mat-raised-button color="primary" type="submit" [disabled]="frmRol.invalid">
                         <mat-icon>done</mat-icon>

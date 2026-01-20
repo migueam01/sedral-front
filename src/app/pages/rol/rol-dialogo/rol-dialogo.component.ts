@@ -25,7 +25,8 @@ export class RolDialogoComponent implements OnInit {
     this.form = new FormGroup({
       'idRol': new FormControl(0),
       'nombre': new FormControl(''),
-      'descripcion': new FormControl('')
+      'descripcion': new FormControl(''),
+      'prioridad': new FormControl('')
     });
 
     this.route.params.subscribe((params: Params) => {
@@ -42,7 +43,8 @@ export class RolDialogoComponent implements OnInit {
           this.form.patchValue({
             'idRol': data.idRol,
             'nombre': data.nombre,
-            'descripcion': data.descripcion
+            'descripcion': data.descripcion,
+            'prioridad': data.prioridad
           });
         }, error: err => {
           console.log(err.error.mensaje);
@@ -54,6 +56,7 @@ export class RolDialogoComponent implements OnInit {
   operar() {
     this.rol.nombre = this.form.value['nombre'];
     this.rol.descripcion = this.form.value['descripcion'];
+    this.rol.prioridad = this.form.value['prioridad'];
     if (this.edicion) {
       this.rol.idRol = this.form.value['idRol'];
       this.rolService.modificar(this.rol).subscribe(() => {
